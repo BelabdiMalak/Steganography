@@ -23,3 +23,10 @@ pip3 install opencv-python
 ```shell
 python3 main.py
 ```
+
+## Hide message 
+Here are steps followed to encode the message into the image:
+- First, we should make sure that the number of pixels of the image is enough to contain our data.
+- Second, we convert our message to binary format.
+- Third, we cycle through the image pixels and convert them to binary.
+- Fourth, every pixel contains three values (red, green, bleu), we replace the least significant bit of each one with a bit from our message.
