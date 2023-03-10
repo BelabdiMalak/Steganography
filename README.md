@@ -15,7 +15,7 @@ sudo apt-get install python3
 sudo apt-get install python3sudo apt-get install python3
 ```
 3. Install OpenCV library using this command : 
-```console
+```shell
 pip3 install opencv-python
 ```
 
@@ -24,9 +24,14 @@ pip3 install opencv-python
 python3 main.py
 ```
 
-## Hide message 
+## Hide a message 
 Here are steps followed to encode the message into the image:
 - First, we should make sure that the number of pixels of the image is enough to contain our data.
 - Second, we convert our message to binary format.
 - Third, we cycle through the image pixels and convert them to binary.
 - Fourth, every pixel contains three values (red, green, bleu), we replace the least significant bit of each one with a bit from our message.
+
+## Read a message
+- First, we read the image.
+- Second, we convert every pixel of the image to binary.
+- Third, we combine the last bits of all pixels and convert them to characters.

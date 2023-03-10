@@ -6,10 +6,9 @@ def getImage():
     path  = input("Enter the path to your image please \n")
     image = cv.imread(path, 1)
     if image is None:
-        print("Empty image path, I can't hide the message.")
+        print("Empty image path, I can't hide the message.\n")
         return 0
     else : 
-        print("Your image is well entered.")
         return image
 
 
@@ -17,8 +16,8 @@ def getMessage():
     message = input("Enter a message to hide \n")
     while(message == ''):
         message = input("Enter a message to hide\n")
-    print("Your message is well entered.")
     return message
+
 
 
 def toBinary(data):
@@ -44,7 +43,9 @@ def encodeMessage():
     if len(message) > maxBytes:
         raise ValueError("[!] Insufficient bytes, need bigger image or less data.")
     else : 
-        print("[*] Encoding data...")
+        print("[*] Encoding data...\n")
+        # add stopping criteria
+        message += "====="
         binaryMessage = toBinary(message)
         messageIndex = 0
         messageLen = len(binaryMessage)
@@ -69,5 +70,25 @@ def encodeMessage():
                 if messageIndex >= messageLen:
                     break
         return image
+    
 
+def decodeMessage(image):
+    print("[+] Decoding...\n")
+    binaryMessage = ""
+    for row in image:
+        for pixel in row:
+            r, g, b = toBinary(pixel)
+            binaryMessage += r[-1]
+            binaryMessage += g[-1]
+            binaryMessage += b[-1]
+    # split by 8-bits
+    allBytes = [ binaryMessage[i: i+8] for i in range(0, len(binaryMessage), 8)]
+    # convert from bits to characters
+    decodedMessage = ''
+    for byte in allBytes:
+        decodedMessage += chr(int(byte,2))
+        if decodedMessage[-5:] == "=====":
+            break
+    print("Your hidden message is : \"", decodedMessage[:-5], "\"")
+    return decodedMessage[:-5]
 
