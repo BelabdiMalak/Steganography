@@ -35,3 +35,4 @@ Here are steps followed to encode the message into the image:
 - First, we read the image.
 - Second, we convert every pixel of the image to binary.
 - Third, we combine the last bits of all pixels and convert them to characters.
+

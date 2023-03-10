@@ -3,7 +3,7 @@ import numpy as np
 
 
 def getImage():
-    path  = input("Enter the path to your image please \n")
+    path  = input("Enter the path to your image \n")
     image = cv.imread(path, 1)
     if image is None:
         print("Empty image path, I can't hide the message.\n")
@@ -72,7 +72,8 @@ def encodeMessage():
         return image
     
 
-def decodeMessage(image):
+def decodeMessage():
+    image = getImage()
     print("[+] Decoding...\n")
     binaryMessage = ""
     for row in image:
@@ -92,3 +93,20 @@ def decodeMessage(image):
     print("Your hidden message is : \"", decodedMessage[:-5], "\"")
     return decodedMessage[:-5]
 
+
+def main():
+    message = input("[*] Enter 1 if you want to encode a message\n[*] Enter 2 if you want to decode a message\n")
+    while(message!='1' and message!='2'):
+        message = input("Please choose either 1 or 2\n")
+    if(message=='1'):
+        encodedImage = encodeMessage()
+        encode = input('[*] Enter y if you want to save the new image\n[*] Enter n if you don\'t want to save the new image\n')
+        while(encode!='y' and encode!='n'):
+            encode = input("Please choose either y or n\n")
+        if(encode=="y"):
+            cv.imwrite("images/encodedImage.png",encodedImage)
+    if(message=='2'):
+        print('[!] Please make sure to enter an image with an encoded message, otherwise you will get a none sense message.')
+        decodedMessage = decodeMessage()
+if __name__==  "__main__":
+    main()
